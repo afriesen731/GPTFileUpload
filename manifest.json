@@ -19,7 +19,9 @@
       "css": ["css/content.css"],
       "js": ["scripts/content.js"],
       "matches": [
-        "https://chat.openai.com/"
+        "https://chat.openai.com/*",
+        "https://chat.openai.com/c/*",
+        "https://www.google.com/"
       ]
     }
   ],
