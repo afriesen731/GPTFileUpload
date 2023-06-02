@@ -1,9 +1,9 @@
 
 
-let jQueryScript = document.createElement("script");
-jQueryScript.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
-const head = document.head;
-head.appendChild(jQueryScript);
+// let jQueryScript = document.createElement("script");
+// jQueryScript.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
+// const body = document.body;
+// body.appendChild(jQueryScript);
 
 const loadWait = 1000;
 const csv =`Language,Extension
@@ -42,49 +42,81 @@ const fileExtentionDict = csvToDict(csv)
 
 
 
-window.addEventListener('load', function() {
+// window.addEventListener('load', function() {
 
-    const form = document.querySelector(".stretch");
+//     const form = document.querySelector(".stretch");
 
 
-    createButtons()
+//     createButtons()
 
-    if (!form) {
-        console.error("failed to get form");
+//     if (!form) {
+//         console.error("failed to get form");
+//     }
+
+//     form.addEventListener("submit", async function(e) {
+//         let loading = true;
+//         while (loading) {
+//             loading = await setTimeout(checkLoading(), loadWait);
+//         }
+
+
+//         createButtons();
+
+
+
+//     });
+// });
+
+document.addEventListener("click", function(e) {
+    let clickedElement = e.target;
+
+
+    let inCodeElement = false;
+
+    let parent = e.target;
+
+    while (parent) {
+        if (parent.tagName == "PRE") {
+            let codeHeading = parent.firstElementChild.firstElementChild;
+
+            let buttonExists = codeHeading.querySelector(".download-code");
+            if (!buttonExists) {
+                let downLoadButton = document.createElement("button");
+                
+                downLoadButton.classList = "download-code";
+                downLoadButton.innerHTML = "download"
+                codeHeading.appendChild(downLoadButton);
+        
+                downLoadButton.addEventListener("click", downloadFile(downLoadButton));
+            }
+
+        }
+        parent = parent.parentElement;
     }
 
-    form.addEventListener("submit", async function(e) {
-        let loading = true;
-        while (loading) {
-            loading = await setTimeout(checkLoading(), loadWait);
-        }
 
 
-        createButtons();
+    
 
 
-
-    });
 });
 
 
 function csvToDict(csv) {
     const lines = csv.split('\n');
-    const headers = lines[0].split(',');
-    const dictArray = [];
+    // const headers = lines[0].split(',');
+    const dict = {};
   
     for (let i = 1; i < lines.length; i++) {
-      const currentLine = lines[i].split(',');
-      const dict = {};
+        let currentLine = lines[i].split(',');
+      
   
-      for (let j = 0; j < headers.length; j++) {
-        dict[headers[j]] = currentLine[j];
-      }
-  
-      dictArray.push(dict);
+      
+        dict[currentLine[0]] = currentLine[1];
+      
     }
   
-    return dictArray;
+    return dict;
 }
 
 
@@ -169,7 +201,7 @@ function createButtons() {
 
 
 
-            downLoadButton.addEventListener("onclick", downloadFile(downLoadButton));
+            downLoadButton.addEventListener("click", downloadFile(downLoadButton));
         }
     });
 }

@@ -10,5 +10,11 @@
 }
 
 .download-code {
-    
+   min-width: 30px;
+   width: 5vw;
+   height: 100%;
+   padding: 2px;
+   margin: 4px;
+   border: solid 1px;
+   border-radius: 5px;
 }
