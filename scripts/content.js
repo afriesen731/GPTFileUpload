@@ -25,6 +25,25 @@ function createFileInput() {
       let fileContent = e.target.result.trim();
 
       let textInput = document.getElementById("prompt-textarea");
+
+
+      // show overflow on text input
+      let textInputStyles = textInput.getAttribute("style").split(";");
+      textInputStyles.forEach((element, index) => {
+        textInputStyles[index] = element.trim();
+      });
+      let overflowOffIndex = textInputStyles.indexOf("overflow-y: hidden");
+      
+      console.log(textInputStyles);
+      if (overflowOffIndex !== -1) {
+        textInputStyles.splice(overflowOffIndex);
+        textInput.setAttribute("style", textInputStyles.join(';'));
+      }
+
+
+      
+
+
       let submitButton = document.querySelector(".right-2");
 
       // Enable the submit button if it is disabled
@@ -41,6 +60,8 @@ function createFileInput() {
 
       // Set focus to the text input
       textInput.focus();
+
+
 
       // Clear the value of the file input
       fileInput.value = '';
