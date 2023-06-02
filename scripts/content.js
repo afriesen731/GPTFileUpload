@@ -33,7 +33,6 @@ function createFileInput() {
         textInputStyles[index] = element.trim();
       });
       let overflowOffIndex = textInputStyles.indexOf("overflow-y: hidden");
-      
       console.log(textInputStyles);
       if (overflowOffIndex !== -1) {
         textInputStyles.splice(overflowOffIndex);

@@ -17,7 +17,7 @@
     "content_scripts": [
     {
       "css": ["css/content.css"],
-      "js": ["scripts/content.js"],
+      "js": ["scripts/content.js", "scripts/downloadCode.js"],
       "matches": [
         "https://chat.openai.com/*",
         "https://chat.openai.com/c/*",
@@ -29,6 +29,7 @@
   "permissions": [
   "activeTab"
   ]
+
 
 }
   
