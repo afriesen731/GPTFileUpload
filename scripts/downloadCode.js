@@ -1,10 +1,3 @@
-
-
-// let jQueryScript = document.createElement("script");
-// jQueryScript.src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js";
-// const body = document.body;
-// body.appendChild(jQueryScript);
-
 const loadWait = 1000;
 const csv =`Language,Extension
 python,.py
@@ -40,33 +33,6 @@ const fileExtentionDict = csvToDict(csv)
 
 
 
-
-
-// window.addEventListener('load', function() {
-
-//     const form = document.querySelector(".stretch");
-
-
-//     createButtons()
-
-//     if (!form) {
-//         console.error("failed to get form");
-//     }
-
-//     form.addEventListener("submit", async function(e) {
-//         let loading = true;
-//         while (loading) {
-//             loading = await setTimeout(checkLoading(), loadWait);
-//         }
-
-
-//         createButtons();
-
-
-
-//     });
-// });
-
 document.addEventListener("click", function(e) {
     let clickedElement = e.target;
 
@@ -77,17 +43,13 @@ document.addEventListener("click", function(e) {
 
     while (parent) {
         if (parent.tagName == "PRE") {
-            let codeHeading = parent.firstElementChild.firstElementChild;
 
-            let buttonExists = codeHeading.querySelector(".download-code");
+
+            let buttonExists = parent.querySelector(".download-code");
             if (!buttonExists) {
-                let downLoadButton = document.createElement("button");
-                
-                downLoadButton.classList = "download-code";
-                downLoadButton.innerHTML = "download"
-                codeHeading.appendChild(downLoadButton);
-        
-                downLoadButton.addEventListener("click", downloadFile(downLoadButton));
+
+                createButton(parent);
+
             }
 
         }
@@ -121,14 +83,11 @@ function csvToDict(csv) {
 
 
 
-function extractCode(html) {
-    const codeElement = $('<div>').html(html).find('code');
-    const code = codeElement.text();
+function extractText(codeElement) {
+    const jQueryCodeElement = $(codeElement);
+    const code = jQueryCodeElement.text();
     return code;
 }
-
-
-
 
 
 async function checkLoading() {
@@ -160,15 +119,14 @@ function downloadFile(button) {
 
     
 
-
-    const jQueryCodeElement = $(codeElement).find('code');
-    const code = jQueryCodeElement.text();
-    
+    let code = extractText(codeElement);
 
     
 
+    
 
-    const filename = fileType + "." + extention;
+
+    const filename = `${fileType}${extention}`;
 
     const blob = new Blob([code], { type: 'text/plain' });
 
@@ -186,24 +144,26 @@ function downloadFile(button) {
     
 }
 
-function createButtons() {
-    allCodeContainers = document.querySelectorAll("pre");
+function createButton(preElement) {
 
-    allCodeContainers.forEach(element => {
-        let codeHeading = element.firstElementChild.firstElementChild;
-        let downLoadButtonExists = codeHeading.querySelector(".download-code");
-        if (!downLoadButtonExists) {
+    let codeHeading = preElement.firstElementChild.firstElementChild;
+    let downLoadButtonExists = codeHeading.querySelector(".download-code");
+    if (!downLoadButtonExists) {
 
-            const downLoadButton = document.createElement("button");
-            
-            downLoadButton.classList = "download-code"
-            codeHeading.appendChild(downLoadButton);
-
+        const downLoadButton = document.createElement("button");
+        
+        downLoadButton.classList = "download-code"
+        downLoadButton.innerHTML = "download"
+        codeHeading.appendChild(downLoadButton);
 
 
-            downLoadButton.addEventListener("click", downloadFile(downLoadButton));
-        }
-    });
+
+        downLoadButton.addEventListener("click", function() {
+            downloadFile(downLoadButton);
+        });
+          
+    }
+
 }
 
 
