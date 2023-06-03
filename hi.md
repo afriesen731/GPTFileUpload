@@ -1,5 +1,4 @@
-# GPTFileUpload
-### Chat GPT File Upload and Code Download Extension
+# Chat GPT File Upload and Code Download Extension
 
 This Google Chrome extension enhances the functionality of chat.openai.com by allowing users to upload text files to the chat input. It also enables users to download code created by Chat GPT as separate files.
 
