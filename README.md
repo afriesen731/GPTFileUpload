@@ -17,10 +17,13 @@ To use this extension, follow these steps:
 
 1. Open chat.openai.com in Google Chrome.
 2. To upload a text file, click the "Choose File" button that appears near the chat input field.
+![Select File](readmeimgs/selectFile.png)
 3. Select a text file from your local machine.
 4. The content of the file will be appended to the text input field.
+![Upload Text](readmeimgs/upload.png)
 5. To download a code snippet, click anywhere inside the code section.
 6. A "Download" button will appear next to the "Copy" button at the top of the code snippet.
+![Download](readmeimgs/download.png)
 7. Click the "Download" button to save the code as a file with the appropriate file extension.
 
 ## Contributions
